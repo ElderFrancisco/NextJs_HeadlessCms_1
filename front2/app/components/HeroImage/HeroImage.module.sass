@@ -1,0 +1,18 @@
+$tiempo-animacion: 1s // Duración de la animación
+$delay: 1s // Establecemos un retraso inicial para la primera clase
+
+.show1, .show2
+    opacity: 0 // Establecemos la opacidad inicial en 0 para que el elemento esté oculto
+    animation: aparecer $tiempo-animacion ease forwards // Nombre de la animación y duración
+
+    @keyframes aparecer
+        from
+            opacity: 0 // Opacidad inicial
+            transform: translateY(-20px) // Movimiento inicial (opcional)
+
+        to
+            opacity: 1 // Opacidad final
+            transform: translateY(0) // Movimiento final (opcional)
+
+.show2
+    animation-delay: $delay // Aplicamos un retraso para la segunda clase

@@ -1,0 +1,16 @@
+$scroll-reveal-duration: 0.5s
+
+@keyframes scroll-reveal
+    from
+        opacity: 0
+        transform: translateY(20px)
+    to
+        opacity: 1
+        transform: translateY(0)
+
+.scroll-reveal
+    animation: scroll-reveal $scroll-reveal-duration ease-in-out
+    opacity: 0
+
+body
+    scroll-behavior: smooth
