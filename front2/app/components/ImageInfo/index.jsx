@@ -4,13 +4,18 @@ import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 
 export default async function ImageInfo({ id }) {
   const data = await getModule(id);
-  console.log(data);
   if (!data) {
     return null;
   }
   return (
     <section className="w-full p-4 border-2   mb-4 show1-down">
-      <div className="flex flex-col-reverse h-full md:h-72 items-center h-full justify-start gap-4 md:flex-row">
+      <div
+        className={
+          data.position === "Right"
+            ? "md:flex-row-reverse flex flex-col-reverse h-full md:h-72 items-center h-full justify-between gap-4"
+            : "md:flex-row flex flex-col-reverse h-full md:h-72 items-center h-full justify-between gap-4 "
+        }
+      >
         {data.image.data !== null ? (
           <img
             className="w-full md:w-1/2 h-full object-cover object-center"

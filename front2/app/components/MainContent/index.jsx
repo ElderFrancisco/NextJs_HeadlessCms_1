@@ -12,6 +12,7 @@ const componentMap = {
 
 export default async function MainContent() {
   const modules = await getModules();
+
   if (!modules) {
     return null;
   }
@@ -19,7 +20,6 @@ export default async function MainContent() {
   return (
     <>
       {modules.map((module) => {
-        console.log(module);
         const Component = componentMap[module.attributes.type];
         return <Component key={module.id} id={module.id} />;
       })}
