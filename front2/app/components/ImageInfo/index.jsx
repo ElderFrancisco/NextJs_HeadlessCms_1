@@ -8,7 +8,7 @@ export default async function ImageInfo({ id }) {
     return null;
   }
   return (
-    <section className="w-full p-4 border-2   mb-4 show1-down">
+    <section id="Image-Info" className="w-full p-4 border-2   mb-4 show1-down">
       <div
         className={
           data.position === "Right"

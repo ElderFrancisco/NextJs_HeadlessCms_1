@@ -17,12 +17,16 @@ export const getModules = async () => {
 export const getModule = async (id) => {
   try {
     const response = await axiosInstance.get(
-      `/modules/${id}?populate[image][fields][0]=url&populate[image][fields][1]=alternativeText`
+      `/modules/${id}?populate[image][fields][0]=url&populate[image][fields][1]=alternativeText&populate[sliderImages][fields][0]=id&populate[sliderImages][fields][1]=url&populate[sliderImages][fields][2]=alternativeText`
     );
 
     if (response.data.data.attributes.image.data !== null) {
       response.data.data.attributes.image.data.attributes.url = `${config.HOST_URL}${response.data.data.attributes.image.data.attributes.url}`;
-    } else {
+    }
+    if (response.data.data.attributes.sliderImages.data !== null) {
+      response.data.data.attributes.sliderImages.data.map((image) => {
+        image.attributes.url = `${config.HOST_URL}${image.attributes.url}`;
+      });
     }
     return response.data.data.attributes;
   } catch (error) {

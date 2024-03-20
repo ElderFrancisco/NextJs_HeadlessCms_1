@@ -7,16 +7,31 @@ import styles from "@/app/ui/NavBar/NavBar.module.sass";
 
 export default function Component() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [mostrar, setMostrar] = useState(true);
+  const [mostrar, setMostrar] = useState(false);
 
   useEffect(() => {
     let prevScrollY = 0;
+
+    if (window.scrollY <= 0) {
+      setMostrar(true);
+    } else {
+      setMostrar(false);
+    }
+
+    if (window.scrollY >= window.innerHeight) {
+      setIsScrolled(true);
+    } else {
+      setIsScrolled(false);
+    }
     const handleScroll = () => {
-      if (window.scrollY >= window.innerHeight) {
+      if (window.scrollY >= window.innerHeight - 50) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
       }
+      console.log(window.scrollY);
+      console.log(prevScrollY);
+
       if (prevScrollY > window.scrollY) {
         setMostrar(true);
       } else {
@@ -36,9 +51,10 @@ export default function Component() {
     <Navbar
       fluid
       rounded
-      className={`fixed z-50 w-full color-white ${
-        isScrolled ? "bg-white" : " bg-transparent text-white"
+      className={`fixed z-50 w-full text-white ${
+        !isScrolled ? styles.fulltransparent : styles.semitransaparent
       } ${mostrar ? styles.show : styles.hide}`}
+      id="nav"
     >
       <Navbar.Brand as={Link} href="https://flowbite-react.com">
         <img
@@ -52,15 +68,21 @@ export default function Component() {
       </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse>
-        <Navbar.Link href="#" active>
+        <Navbar.Link href="#" className="text-white">
           Home
         </Navbar.Link>
-        <Navbar.Link as={Link} href="#">
-          About
+        <Navbar.Link href="#Image-Info" className="text-white">
+          Locales
         </Navbar.Link>
-        <Navbar.Link href="#">Services</Navbar.Link>
-        <Navbar.Link href="#">Pricing</Navbar.Link>
-        <Navbar.Link href="#">Contact</Navbar.Link>
+        <Navbar.Link href="#" className="text-white">
+          Services
+        </Navbar.Link>
+        <Navbar.Link href="#" className="text-white">
+          Pricing
+        </Navbar.Link>
+        <Navbar.Link href="#" className="text-white">
+          Contact
+        </Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
   );
